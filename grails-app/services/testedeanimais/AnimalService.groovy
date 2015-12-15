@@ -17,7 +17,7 @@ class AnimalService {
 			Animal root = new Animal();
 			Animal leaf = new Animal();
 	
-			root.setQuestion("O animal que vc pensou vive na água")
+			root.setQuestion("O animal que você pensou vive na água")
 			root.save(flush:true)
 			leaf.setQuestion("Tubarão")
 			leaf.save(flush:true)
@@ -60,7 +60,7 @@ class AnimalService {
 		left.save(flush:true)
 		right.setQuestion(animal.getQuestion())
 		right.save(flush:true)
-		animal.setQuestion("O animal que vc pensou " + carac)
+		animal.setQuestion("O animal que você pensou " + carac)
 		animal.setLeftAnwser(left)
 		animal.setRightAnwser(right)
 	}
