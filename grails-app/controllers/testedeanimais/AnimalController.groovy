@@ -33,21 +33,9 @@ class AnimalController {
 		}
 	}
 
-	def yesQuestion() {
-		render(view:"/animal/success")
-	}
-
-	def noQuestion () {
-		Animal animal = Animal.get(params.id)
-		render(view:"/animal/whatAnimal", model:[animal: animal])
-	}
 	
-	def save() {
-		animalService.save(params.nome,params.carac, params.id)
-		render(view:"/animal/start")
-	}
-
-
+	
+	
 	def no() {
 		Animal animal = Animal.get(params.id)
 		if(!animalService.isLeaf(animal.rightAnwser)) {
@@ -57,9 +45,4 @@ class AnimalController {
 		}
 	}
 
-	def clear() {
-		Animal.executeUpdate("delete from Animal")
-		redirect(view : "/animal/play")
-
-	}
 }

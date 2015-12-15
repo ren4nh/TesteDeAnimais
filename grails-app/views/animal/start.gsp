@@ -8,7 +8,7 @@
 	<body>
 		<div id="divMain">
 			<h1> Pense em um animal</h1>
-			<g:link action="start">
+			<g:link controller="animal" action="start">
 			<input type="button" value="Ok" class="button"/>
 			</g:link>
 		</div>

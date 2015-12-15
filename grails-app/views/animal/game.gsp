@@ -10,10 +10,10 @@
 	<body>
 		<div id="divQ">
 			<h1>${animal.question}</h1>
-			<g:link action="yes" params="[id: animal.id]">
+			<g:link controller="animal" action="yes" params="[id: animal.id]">
 			<input type="button" value="Yes" class="button"/>
 			</g:link>
-			<g:link action="no" params="[id: animal.id]">
+			<g:link controller="animal" action="no" params="[id: animal.id]">
 			<input type="button" value="No" class="button"/>
 			</g:link>
 			<input type="hidden" name="id" value="${animal.id}"/>

@@ -10,7 +10,7 @@
 <body>
 	<div id="divQ">
 		<h1>Acertei denovo!</h1>
-		<g:link action="play">
+		<g:link controller="animal" action="play">
 			<input type="button" value="Inicio" class="button" />
 		</g:link>
 	</div>
