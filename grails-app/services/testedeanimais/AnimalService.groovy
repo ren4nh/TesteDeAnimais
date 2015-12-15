@@ -7,33 +7,51 @@ import grails.transaction.Transactional
 
 @Transactional
 class AnimalService {
+	
+	/**
+	 * Method responsible for creating the initial tree
+	 */
 
     void createTree() {
 
-			Animal pai = new Animal();
-			Animal filho = new Animal();
+			Animal root = new Animal();
+			Animal leaf = new Animal();
 	
-			pai.setQuestion("O animal que vc pensou vive na água?")
-			pai.save(flush:true)
-			filho.setQuestion("Tubarão")
-			filho.save(flush:true)
-			pai.setLeftAnwser(filho);
-			filho = new Animal();
-			filho.setQuestion("Macaco")
-			filho.save(flush:true)
-			pai.setRightAnwser(filho);
-			pai.save(flush:true)
+			root.setQuestion("O animal que vc pensou vive na água")
+			root.save(flush:true)
+			leaf.setQuestion("Tubarão")
+			leaf.save(flush:true)
+			root.setLeftAnwser(leaf);
+			leaf = new Animal();
+			leaf.setQuestion("Macaco")
+			leaf.save(flush:true)
+			root.setRightAnwser(leaf);
+			root.save(flush:true)
 
     }
 	
+	/**
+	 * Method responsible for testing if the object is a leaf of the tree
+	 * @param animal
+	 * @return
+	 */
 	boolean isLeaf(Animal animal) {
 		return (animal.getLeftAnwser() == null && animal.getRightAnwser() == null)
 	}
 	
+	/**
+	 * Method responsible for cleaning the database
+	 */
 	void clearDatabase() {
 		Animal.executeUpdate("delete from Animal")
 	}
 	
+	/**
+	 * Method responsible for learning the new animal and save it in the database
+	 * @param name
+	 * @param carac
+	 * @param id
+	 */
 	void save(String name, String carac, String id) {
 		Animal animal = Animal.get(id)
 		Animal left = new Animal();

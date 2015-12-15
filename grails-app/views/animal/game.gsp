@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="divQ">
-			<h1>${animal.question}</h1>
+			<h1>${animal.question}?</h1>
 			<g:link controller="animal" action="yes" params="[id: animal.id]">
 			<input type="button" value="Yes" class="button"/>
 			</g:link>

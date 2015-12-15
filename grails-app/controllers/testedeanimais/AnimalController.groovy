@@ -33,7 +33,11 @@ class AnimalController {
 		}
 	}
 
-	
+	def clear() {
+		animalService.clearDatabase()
+		animalService.createTree()
+		render(view:"/animal/index")
+	}
 	
 	
 	def no() {
