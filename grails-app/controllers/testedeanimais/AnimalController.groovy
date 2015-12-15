@@ -1,11 +1,17 @@
 package testedeanimais
 
 import core.Animal;
+import testedeanimais.AnimalService;
 
 class AnimalController {
+	
+	AnimalService animalService
 
 	def index() {
-		createTree()
+		List<Animal> lista = Animal.list()
+		if (lista.isEmpty()) {
+			animalService.createTree()			
+		}
 		render(view : "/animal/index")
 	}
 
@@ -20,7 +26,7 @@ class AnimalController {
 
 	def yes() {
 		Animal animal = Animal.get(params.id)
-		if(!isLeaf(animal.leftAnwser)) {
+		if(!animalService.isLeaf(animal.leftAnwser)) {
 			render(view:"/animal/game", model:[animal: animal.leftAnwser])
 		} else {
 			render(view:"/animal/question", model:[animal: animal.leftAnwser])
@@ -37,49 +43,23 @@ class AnimalController {
 	}
 	
 	def save() {
-		Animal animal = Animal.get(params.id)
-		Animal left = new Animal();
-		Animal right = new Animal();
-		left.setQuestion(params.nome)
-		left.save(flush:true)
-		right.setQuestion(animal.getQuestion())
-		right.save(flush:true)
-		animal.setQuestion("O animal que vc pensou " + params.carac)
-		animal.setLeftAnwser(left)
-		animal.setRightAnwser(right)
-		animal.save(flush:true)
+		animalService.save(params.nome,params.carac, params.id)
 		render(view:"/animal/start")
 	}
 
 
 	def no() {
 		Animal animal = Animal.get(params.id)
-		if(!isLeaf(animal.rightAnwser)) {
+		if(!animalService.isLeaf(animal.rightAnwser)) {
 			render(view:"/animal/game", model:[animal: animal.rightAnwser])
 		} else {
 			render(view:"/animal/question", model:[animal: animal.rightAnwser])
 		}
 	}
 
-	private Animal createTree() {
-		Animal pai = new Animal();
-		Animal filho = new Animal();
+	def clear() {
+		Animal.executeUpdate("delete from Animal")
+		redirect(view : "/animal/play")
 
-		pai.setQuestion("O animal que vc pensou vive na agua?")
-		pai.save(flush:true)
-		filho.setQuestion("Tubarão")
-		filho.save(flush:true)
-		pai.setLeftAnwser(filho);
-		filho = new Animal();
-		filho.setQuestion("Macaco")
-		filho.save(flush:true)
-		pai.setRightAnwser(filho);
-		pai.save(flush:true)
-
-		return pai;
-	}
-
-	private boolean isLeaf(Animal animal) {
-		return (animal.getLeftAnwser() == null && animal.getRightAnwser() == null)
 	}
 }

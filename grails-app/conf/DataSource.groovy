@@ -13,7 +13,7 @@ environments {
 	development {
 		dataSource {
 			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-			url = "jdbc:mysql://localhost/animal"
+			url = "jdbc:mysql://localhost/animal?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
 			password = "root"
 		}
@@ -21,7 +21,7 @@ environments {
 	test {
 		dataSource {
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost/animal"
+			url = "jdbc:mysql://localhost/animal?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
 			password = "root"
 		}
@@ -29,7 +29,7 @@ environments {
 	production {
 		dataSource {
 			dbCreate = "update"
-			url = "jdbc:mysql://localhost/animal"
+			url = "jdbc:mysql://localhost/animal?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
 			password = "root"
 		}
