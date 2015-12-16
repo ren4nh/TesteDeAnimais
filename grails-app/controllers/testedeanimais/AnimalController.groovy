@@ -4,13 +4,13 @@ import core.Animal;
 import testedeanimais.AnimalService;
 
 class AnimalController {
-	
+
 	AnimalService animalService
 
 	def index() {
 		List<Animal> lista = Animal.list()
 		if (lista.isEmpty()) {
-			animalService.createTree()			
+			animalService.createTree()
 		}
 		render(view : "/animal/index")
 	}
@@ -20,8 +20,15 @@ class AnimalController {
 	}
 
 	def start() {
-		Animal root = Animal.list().get(0)
-		render(view:"/animal/game", model:[animal: root])
+		List<Animal> lista = Animal.list()
+		if (!lista.isEmpty()) {
+			Animal root = Animal.list().get(0)
+			render(view:"/animal/game", model:[animal: root])
+		} else {
+			animalService.createTree()
+			Animal root = Animal.list().get(0)
+			render(view:"/animal/game", model:[animal: root])
+		}
 	}
 
 	def yes() {
@@ -38,8 +45,8 @@ class AnimalController {
 		animalService.createTree()
 		render(view:"/animal/index")
 	}
-	
-	
+
+
 	def no() {
 		Animal animal = Animal.get(params.id)
 		if(!animalService.isLeaf(animal.rightAnwser)) {
@@ -48,5 +55,4 @@ class AnimalController {
 			render(view:"/animal/question", model:[animal: animal.rightAnwser])
 		}
 	}
-
 }
